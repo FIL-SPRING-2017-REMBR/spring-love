@@ -9,24 +9,27 @@ There are two main branches to the repository:
 * **dev** : *lastest development state*
 
 #### feature branches
-##### 
-> $ git checkout **-b** *myfeature* dev
+##### Creating a new feature branch
+1. create a new branch from dev
+       
+       $ git checkout -b myfeature dev
+
 ##### Incorporating a finished feature to dev
-switch to branch dev
+1. switch to branch dev
 
-> $ git checkout dev
+       $ git checkout dev
 
-merge myfeature to dev
+2. merge myfeature to dev (**do not forget the --no-ff option**)
 
-> $ git merge **--no-ff** myfeature
+       $ git merge --no-ff myfeature
 
-delete myfeature branch
+3. delete myfeature branch
 
-> $ git branch -d myfeature
+       $ git branch -d myfeature
 
-push to repository
+4. push to repository
 
-> $ git push myremote dev
+       $ git push myremote dev
 
 ### RESTfull APIs
 * [POST] - **create**
