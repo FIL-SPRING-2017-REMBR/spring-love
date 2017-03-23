@@ -1,17 +1,61 @@
 # SPRING LOVE - SERVER
 ## RESTfull API
+
 #### Skill
-* **/skill/add/** : *adds a new skill*;
-* **/skill/link/skill/** : *links two skills*;
-* **/skill/link/ress/** : *links a skill to an external ressource*;
-* **/skill/get/** : *retrieves skills*.
+
+* **/skill/add/?params** : *adds a new skill*
+  
+  name=value : the name of the new skill (**mandatory**)
+
+        example:
+  
+* **/skill/link/skill/?params** : *links two skills*
+  
+  skillId1=value : the name of the parent skill (**mandatory**)</br>
+  skillId2=value : the name of the child skill (**mandatory**)
+
+        example:
+
+* **/skill/link/ress/?params** : *links a skill to an external ressource*
+  
+  skillId=value : the name of the skill (**mandatory**)</br>
+  ress=value : the ressource as a string (**mandatory**)
+
+        example:
+
+* **/skill/get/?params** : *retrieves skills*
+  all : get all skills (*default*)</br>
+  contains=value : get skills containing value in their title (*optional*)</br>
+  name=value : get skills with a specific name (*optional*)</br>
+  id=value : (*optional*)
+  
+        example:
+
 #### Worker
-* **/worker/add/** : *adds a new worker*;
-* **/worker/link/exp/** : *links a worker to an experience*;
-* **/worker/link/ress/** : *links a worker to an external ressource*;
-* **/worker/def/level/** : *defines the level of a worker in a specific skill*;
-* **/worker/def/trend/** : *defines the trend of the level of a worker in a specific skill*;
-* **/worker/get/** : *retrieves workers*.
+
+* **/worker/add/?params** : *adds a new worker*
+
+        example:
+* **/worker/link/exp/?params** : *links a worker to an experience*
+
+        example:
+* **/worker/link/ress/?params** : *links a worker to an external ressource*
+
+        example:
+* **/worker/def/level/?params** : *defines the level of a worker in a specific skill*
+
+        example:
+* **/worker/def/trend/?params** : *defines the trend of the level of a worker in a specific skill*
+
+        example:
+* **/worker/get/?params** : *retrieves workers*
+
+        example:
 #### Experience
-* **/exp/add/** : *adds a new experience*;
-* **/exp/get/** : *retrieves experiences*.
+
+* **/exp/add/?params** : *adds a new experience*
+
+        example:
+* **/exp/get/?params** : *retrieves experiences*
+
+        example:
