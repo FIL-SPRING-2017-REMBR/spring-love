@@ -53,6 +53,7 @@ public class Skill {
 		this.resources = resources;
 		this.skill = skill;
 	}
+	
 
 	public String getName() {
 		return name;
