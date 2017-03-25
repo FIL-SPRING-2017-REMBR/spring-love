@@ -20,19 +20,26 @@ public class Worker {
 	
 	/** The experiences of the Worker. */
 	private List<Experience> experiences;
-
 	
-	public Worker(String firstName, String lastName) {
-		super();
-		this.firstName = firstName;
-		this.lastName = lastName;
-	}
+	/** The Skills that this Worker knows (key) and the Maturity for each skill */
+	private Map<Skill, Maturity> skills;
 
-	public Worker(String firstName, String lastName, Map<String, String> resources) {
+	/**
+	 * Instantiates a new Worker.
+	 * @param firstName The first name of the Worker.
+	 * @param lastName The last name of the Worker.
+	 * @param resources Resources related to this Worker. It links a label to an URL.
+	 * @param experiences The experiences of the Worker.
+	 * @param skills The Skills that this Worker knows (key) and the
+	 */
+	public Worker(String firstName, String lastName, Map<String, String> resources, List<Experience> experiences,
+			Map<Skill, Maturity> skills) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.resources = resources;
+		this.experiences = experiences;
+		this.skills = skills;
 	}
 
 	
@@ -66,6 +73,14 @@ public class Worker {
 
 	public void setExperiences(List<Experience> experiences) {
 		this.experiences = experiences;
+	}
+
+	public Map<Skill, Maturity> getSkills() {
+		return skills;
+	}
+
+	public void setSkills(Map<Skill, Maturity> skills) {
+		this.skills = skills;
 	}
 
 }
