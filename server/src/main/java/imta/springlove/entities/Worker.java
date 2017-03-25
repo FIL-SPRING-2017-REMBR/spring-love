@@ -22,7 +22,7 @@ public class Worker {
 	private List<Experience> experiences;
 	
 	/** The Skills that this Worker knows (key) and the Maturity for each skill */
-	private Map<Skill, Maturity> skills;
+	private Map<Skill, Appetence> skills;
 
 	/**
 	 * Instantiates a new Worker.
@@ -33,7 +33,7 @@ public class Worker {
 	 * @param skills The Skills that this Worker knows (key) and the
 	 */
 	public Worker(String firstName, String lastName, Map<String, String> resources, List<Experience> experiences,
-			Map<Skill, Maturity> skills) {
+			Map<Skill, Appetence> skills) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -75,11 +75,11 @@ public class Worker {
 		this.experiences = experiences;
 	}
 
-	public Map<Skill, Maturity> getSkills() {
+	public Map<Skill, Appetence> getSkills() {
 		return skills;
 	}
 
-	public void setSkills(Map<Skill, Maturity> skills) {
+	public void setSkills(Map<Skill, Appetence> skills) {
 		this.skills = skills;
 	}
 

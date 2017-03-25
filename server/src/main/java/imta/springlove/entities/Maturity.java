@@ -7,10 +7,10 @@ package imta.springlove.entities;
  */
 public enum Maturity {
 
-	NOVICE,
-	ADVANCED,
+	NOVICE    ,
+	ADVANCED  ,
 	COMPETENCE,
 	PROFICIENT,
-	EXPERT;
+	EXPERT    ;
 	
 }
