@@ -6,8 +6,16 @@ package imta.springlove.entities;
  */
 public enum Trend {
 
-	INCREASING,
-	STABLE    ,
-	DECREASING;
+	INCREASING(1),
+	STABLE(2)    ,
+	DECREASING(3);
 
+	private final int value;
+    private Trend(int value) {
+        this.value = value;
+    }
+
+    public int getValue() {
+        return value;
+    }
 }

@@ -7,10 +7,19 @@ package imta.springlove.entities;
  */
 public enum Maturity {
 
-	NOVICE    ,
-	ADVANCED  ,
-	COMPETENCE,
-	PROFICIENT,
-	EXPERT    ;
+	NOVICE(1)    ,
+	ADVANCED(2)  ,
+	COMPETENCE(3),
+	PROFICIENT(4),
+	EXPERT(5)    ;
+	
+	private final int value;
+    private Maturity(int value) {
+        this.value = value;
+    }
+
+    public int getValue() {
+        return value;
+    }
 	
 }

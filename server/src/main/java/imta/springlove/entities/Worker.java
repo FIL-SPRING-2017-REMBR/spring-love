@@ -8,6 +8,9 @@ import java.util.Map;
  * (URLs) related to him/her.
  */
 public class Worker {
+	
+	/** Id of the Worker. */
+	private int id;
 
 	/** The first name of the Worker. */
 	private String firstName;
@@ -35,6 +38,7 @@ public class Worker {
 	public Worker(String firstName, String lastName, Map<String, String> resources, List<Experience> experiences,
 			Map<Skill, Appetence> skills) {
 		super();
+		this.id = 0;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.resources = resources;
@@ -42,6 +46,13 @@ public class Worker {
 		this.skills = skills;
 	}
 
+	public int getId(){
+		return id;
+	}
+	
+	public void setId(int id){
+		this.id = id;
+	}
 	
 	public String getFirstName() {
 		return firstName;
