@@ -21,5 +21,20 @@ public enum Maturity {
     public int getValue() {
         return value;
     }
+    
+    public static Maturity getMaturity(int value){
+    	switch(value){
+    	case 1:
+    		return NOVICE;
+    	case 2:
+    		return ADVANCED;
+    	case 3:
+    		return COMPETENCE;
+    	case 4:
+    		return PROFICIENT;
+    	default:
+    		return EXPERT;
+    	}
+    }
 	
 }

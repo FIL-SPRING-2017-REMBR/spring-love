@@ -18,4 +18,15 @@ public enum Trend {
     public int getValue() {
         return value;
     }
+    
+    public static Trend getTrend(int value){
+    	switch(value){
+    	case 1:
+    		return INCREASING;
+    	case 2:
+    		return STABLE;
+    	default:
+    		return DECREASING;
+    	}
+    }
 }
