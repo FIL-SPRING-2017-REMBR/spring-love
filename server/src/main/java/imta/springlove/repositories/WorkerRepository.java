@@ -1,4 +1,4 @@
-package imta.springlove.entities;
+package imta.springlove.repositories;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,6 +9,10 @@ import java.util.List;
 import java.util.Map;
 
 import imta.springlove.config.DatabaseConnection;
+import imta.springlove.entities.Appetence;
+import imta.springlove.entities.Experience;
+import imta.springlove.entities.Skill;
+import imta.springlove.entities.Worker;
 
 public class WorkerRepository {
 	
