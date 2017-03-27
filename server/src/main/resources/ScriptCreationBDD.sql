@@ -8,6 +8,8 @@ CREATE TABLE SpringLoveUser
 	username VARCHAR(30) NOT NULL,
 	passwd VARCHAR(30) NOT NULL
 )
+insert into SpringLoveUser(username, passwd) values('test', 'test');
+
 ENGINE=InnoDB;
 
 CREATE TABLE Worker
