@@ -2,6 +2,7 @@ package imta.springlove.controllers;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -40,11 +41,14 @@ public class WorkerController {
 		worker.setId(0);
 		
 		// insert it in the database
-		WorkerRepository.persist(worker);
-		
-		return ResponseEntity.created(new URI("")).build();
+		try {
+			WorkerRepository.persist(worker);
+			return ResponseEntity.created(new URI("")).build();
+		} catch (SQLException e) {
+			// if there is a problem : return a server error
+			return ResponseEntity.status(500).build();
+		}
 	}
-	
 	
 	// TODO update method. Needs the name of the Worker and the data to update 
 	
