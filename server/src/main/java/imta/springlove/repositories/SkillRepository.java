@@ -13,6 +13,32 @@ import imta.springlove.entities.Skill;
 
 public class SkillRepository {
 	
+	public static Skill getSkillById(int id) throws SQLException {
+		Skill skill = null;
+		Connection conn = DatabaseConnection.getConnection();
+		String sql = "SELECT * FROM Skill WHERE id = "+id+";";
+		Statement statement = conn.createStatement();
+		ResultSet rs = statement.executeQuery(sql);
+		if(rs.next()) {
+			skill = new Skill(rs.getString("libelle"));
+			skill.setId(rs.getInt("id"));
+		}
+		return skill;
+	}
+	
+	public static Skill getSkillByName(String name) throws SQLException {
+		Skill skill = null;
+		Connection conn = DatabaseConnection.getConnection();
+		String sql = "SELECT * FROM Skill WHERE libelle = '"+name+"';";
+		Statement statement = conn.createStatement();
+		ResultSet rs = statement.executeQuery(sql);
+		if(rs.next()) {
+			skill = new Skill(rs.getString("libelle"));
+			skill.setId(rs.getInt("id"));
+		}
+		return skill;
+	}
+	
 	public static List<Skill> getSkills() throws SQLException {
 		List<Skill> skills = new ArrayList<Skill>();
 		
