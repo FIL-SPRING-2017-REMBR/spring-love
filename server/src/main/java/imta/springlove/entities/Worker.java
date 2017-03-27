@@ -1,5 +1,6 @@
 package imta.springlove.entities;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -7,8 +8,10 @@ import java.util.Map;
  * Represents a Worker, with his/her name, his/her experiences and resources
  * (URLs) related to him/her.
  */
-public class Worker {
+public class Worker implements Serializable {
 	
+	private static final long serialVersionUID = -7361947245745149893L;
+
 	/** Id of the Worker. */
 	private int id;
 
@@ -44,6 +47,10 @@ public class Worker {
 		this.resources = resources;
 		this.experiences = experiences;
 		this.skills = skills;
+	}
+	
+	public Worker() {
+		// constructeur par défaut
 	}
 
 	public int getId(){
@@ -92,6 +99,12 @@ public class Worker {
 
 	public void setSkills(Map<Skill, Appetence> skills) {
 		this.skills = skills;
+	}
+
+	@Override
+	public String toString() {
+		return "Worker [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", resources=" + resources
+				+ ", experiences=" + experiences + ", skills=" + skills + "]";
 	}
 
 }

@@ -1,5 +1,6 @@
 package imta.springlove.entities;
 
+import java.io.Serializable;
 import java.util.Map;
 
 /**
@@ -7,8 +8,13 @@ import java.util.Map;
  * 
  * A Skill can have one child skill
  */
-public class Skill {
+public class Skill implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/** The skill id */
 	private int id;
 

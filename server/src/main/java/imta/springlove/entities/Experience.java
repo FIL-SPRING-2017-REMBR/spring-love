@@ -1,13 +1,15 @@
 package imta.springlove.entities;
 
+import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Represents an Experience.
  */
-public class Experience {
+public class Experience implements Serializable {
 	
+	private static final long serialVersionUID = 4046327469022844579L;
+
 	/** The id of the experience */
 	private int id;
 

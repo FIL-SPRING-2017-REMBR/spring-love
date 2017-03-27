@@ -258,6 +258,7 @@ public class WorkerRepository {
 			ExperienceRepository.persist(experience, worker.getId());
 		}
 		
+		conn.commit();
 		conn.close();
 	}
 	

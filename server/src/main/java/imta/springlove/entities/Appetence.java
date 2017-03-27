@@ -1,11 +1,15 @@
 package imta.springlove.entities;
 
+import java.io.Serializable;
+
 /**
  * Represents the appetence of a {@link Worker} for a given {@link Skill}. An
  * appetence is composed of the current level of the Worker for the Skill and
  * its trend of evolution.
  */
-public class Appetence {
+public class Appetence implements Serializable {
+
+	private static final long serialVersionUID = -8626096855333262398L;
 
 	/** The current level of competence. */
 	private Maturity maturity;

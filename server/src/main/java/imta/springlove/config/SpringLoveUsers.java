@@ -25,7 +25,7 @@ public class SpringLoveUsers implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-		String sql = "SELECT * FROM User WHERE Name = ?";
+		String sql = "SELECT * FROM SpringLoveUser WHERE username = ?";
 		UserDetails user = null;
 		Connection conn = null;
 
@@ -35,7 +35,7 @@ public class SpringLoveUsers implements UserDetailsService {
 			ps.setString(1, username);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next())
-				user = new User(rs.getString("username"), rs.getString("password"), this.getAuthorities());
+				user = new User(rs.getString("username"), rs.getString("passwd"), this.getAuthorities());
 			else
 				throw new UsernameNotFoundException(username);
 			rs.close();
