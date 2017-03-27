@@ -172,25 +172,25 @@ public class WorkerRepository {
 		psDropSkill.executeUpdate();
 		psDropSkill.close();
 		for (Map.Entry<Skill,Appetence> entry : worker.getSkills().entrySet()) {
-			int skillId = 0;
-			String sqlSkill = "INSERT INTO Skill " +
-				"(libelle) VALUES (?);";
-			PreparedStatement psSkill = conn.prepareStatement(sqlSkill,Statement.RETURN_GENERATED_KEYS);
-			psSkill.setString(1, entry.getKey().getName());
-			psSkill.executeUpdate();
-			ResultSet generatedKeysSkill = psSkill.getGeneratedKeys();
-			if (generatedKeysSkill.next()) {
-				skillId = generatedKeysSkill.getInt(1);
-	        }
-			psSkill.close();
+			int skillId = SkillRepository.persist(entry.getKey());
+//			String sqlSkill = "INSERT INTO Skill " +
+//				"(libelle) VALUES (?);";
+//			PreparedStatement psSkill = conn.prepareStatement(sqlSkill,Statement.RETURN_GENERATED_KEYS);
+//			psSkill.setString(1, entry.getKey().getName());
+//			psSkill.executeUpdate();
+//			ResultSet generatedKeysSkill = psSkill.getGeneratedKeys();
+//			if (generatedKeysSkill.next()) {
+//				skillId = generatedKeysSkill.getInt(1);
+//	        }
+//			psSkill.close();
 			
 			String sqlAppetence = "INSERT INTO WorkerSkill " +
 				"(FK_workerId, FK_skillId, FK_maturityId, FK_trendId) VALUES (?, ?, ?, ?);";
 			PreparedStatement psAppetence = conn.prepareStatement(sqlAppetence,Statement.RETURN_GENERATED_KEYS);
-			psSkill.setInt(1, worker.getId());
-			psSkill.setInt(2, skillId);
-			psSkill.setInt(3, entry.getValue().getMaturity().getValue());
-			psSkill.setInt(4, entry.getValue().getTrend().getValue());
+			psAppetence.setInt(1, worker.getId());
+			psAppetence.setInt(2, skillId);
+			psAppetence.setInt(3, entry.getValue().getMaturity().getValue());
+			psAppetence.setInt(4, entry.getValue().getTrend().getValue());
 		}
 		
 		//Modify Worker's Experiences
@@ -230,17 +230,17 @@ public class WorkerRepository {
 		
 		//Persist Worker's skills
 		for (Map.Entry<Skill,Appetence> entry : worker.getSkills().entrySet()) {
-			int skillId = 0;
-			String sqlSkill = "INSERT INTO Skill " +
-				"(libelle) VALUES (?);";
-			PreparedStatement psSkill = conn.prepareStatement(sqlSkill,Statement.RETURN_GENERATED_KEYS);
-			psSkill.setString(1, entry.getKey().getName());
-			psSkill.executeUpdate();
-			ResultSet generatedKeysSkill = psSkill.getGeneratedKeys();
-			if (generatedKeysSkill.next()) {
-				skillId = generatedKeysSkill.getInt(1);
-	           }
-			psSkill.close();
+			int skillId = SkillRepository.persist(entry.getKey());
+//			String sqlSkill = "INSERT INTO Skill " +
+//				"(libelle) VALUES (?);";
+//			PreparedStatement psSkill = conn.prepareStatement(sqlSkill,Statement.RETURN_GENERATED_KEYS);
+//			psSkill.setString(1, entry.getKey().getName());
+//			psSkill.executeUpdate();
+//			ResultSet generatedKeysSkill = psSkill.getGeneratedKeys();
+//			if (generatedKeysSkill.next()) {
+//				skillId = generatedKeysSkill.getInt(1);
+//	        }
+//			psSkill.close();
 			
 			String sqlAppetence = "INSERT INTO WorkerSkill " +
 				"(FK_workerId, FK_skillId, FK_maturityId, FK_trendId) VALUES (?, ?, ?, ?);";

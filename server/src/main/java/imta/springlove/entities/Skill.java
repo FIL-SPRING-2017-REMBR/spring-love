@@ -8,6 +8,9 @@ import java.util.Map;
  * A Skill can have one child skill
  */
 public class Skill {
+	
+	/** The skill id */
+	private int id;
 
 	/** The skill name. */
 	private String name;
@@ -25,6 +28,7 @@ public class Skill {
 	 * @param name the name of the Skill
 	 */
 	public Skill(String name) {
+		this.id = 0;
 		this.name = name;
 	}
 
@@ -36,6 +40,7 @@ public class Skill {
 	 */
 	public Skill(String name, Map<String, String> resources) {
 		super();
+		this.id = 0;
 		this.name = name;
 		this.resources = resources;
 	}
@@ -49,12 +54,21 @@ public class Skill {
 	 */
 	public Skill(String name, Map<String, String> resources, Skill skill) {
 		super();
+		this.id = 0;
 		this.name = name;
 		this.resources = resources;
 		this.skill = skill;
 	}
 	
+	
+	public int getId(){
+		return id;
+	}
 
+	public void setId(int id){
+		this.id = id;
+	}
+	
 	public String getName() {
 		return name;
 	}
