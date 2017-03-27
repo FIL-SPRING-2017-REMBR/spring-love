@@ -29,17 +29,8 @@ public class WorkerController {
 	 * @return the right HTTP status code
 	 * @throws URISyntaxException
 	 */
-	@RequestMapping(method = RequestMethod.GET, value = "/worker")
-	public ResponseEntity<?> persistWorker(
-			@RequestParam(value = "fistName", required = true) String firstName,
-			@RequestParam(value = "lastName", required = true) String lastName,
-			@RequestParam(value = "resources", required = true) Map<String, String> resources,
-			@RequestParam(value = "experiences", required = true) List<Experience> experiences,
-			@RequestParam(value = "skill", required = true) Map<Skill, Appetence> skills) throws URISyntaxException {
-		// instantiate the worker
-		Worker worker = new Worker(firstName, lastName, resources, experiences, skills);
-		worker.setId(0);
-		
+	@RequestMapping(method = RequestMethod.POST, value = "/worker")
+	public ResponseEntity<?> persistWorker(@RequestParam(value = "worker", required = true) Worker worker) throws URISyntaxException {
 		// insert it in the database
 		try {
 			WorkerRepository.persist(worker);
@@ -50,8 +41,24 @@ public class WorkerController {
 		}
 	}
 	
-	// TODO update method. Needs the name of the Worker and the data to update 
+	/**
+	 * Get the workers.
+	 */
+	@RequestMapping(method = RequestMethod.GET, value = "/worker/all")
+	public List<Worker> getWorkers() throws SQLException {
+		return WorkerRepository.getWorkers();
+	}
 	
-	// TODO get all workers
+	/**
+	 * Get a Worker by it's name.
+	 */
+	@RequestMapping(method = RequestMethod.GET, value = "/worker")
+	public Worker getByName(
+			@RequestParam(value = "firstName", required = true) String firstName,
+			@RequestParam(value = "lastName", required = true) String lastName) throws SQLException {
+		return WorkerRepository.getByName(firstName, lastName);
+	}
+	
+	// TODO update method. Needs the name of the Worker and the data to update 
 	
 }
