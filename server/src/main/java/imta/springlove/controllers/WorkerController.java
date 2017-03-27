@@ -5,7 +5,11 @@ import java.net.URISyntaxException;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.websocket.server.PathParam;
+
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,16 +22,15 @@ import imta.springlove.repositories.WorkerRepository;
  * Controller for the worker part of the API.
  */
 @RestController
+@RequestMapping("/worker")
 public class WorkerController {
-
-	private static final String CHEMIN_WORKER = "/worker";
 
 	/**
 	 * Persists a Worker entity with the given data
 	 * @return the right HTTP status code
 	 * @throws URISyntaxException
 	 */
-	@RequestMapping(method = RequestMethod.POST, value = CHEMIN_WORKER)
+	@PostMapping
 	public ResponseEntity<?> persistWorker(@RequestParam(value = "worker", required = true) Worker worker) throws URISyntaxException {
 		// insert it in the database
 		try {
@@ -42,7 +45,7 @@ public class WorkerController {
 	/**
 	 * Get the workers.
 	 */
-	@RequestMapping(method = RequestMethod.GET, value = CHEMIN_WORKER + "/all")
+	@RequestMapping(method = RequestMethod.GET, value = "/all")
 	public List<Worker> getWorkers() throws SQLException {
 		return WorkerRepository.getWorkers();
 	}
@@ -50,19 +53,17 @@ public class WorkerController {
 	/**
 	 * Get a Worker by it's name.
 	 */
-	@RequestMapping(method = RequestMethod.GET, value = CHEMIN_WORKER)
-	public Worker getByName(
-			@RequestParam(value = "firstName", required = true) String firstName,
-			@RequestParam(value = "lastName", required = true) String lastName) throws SQLException {
+	@RequestMapping(method = RequestMethod.GET, value = "/{firstName}/{lastName}")
+	public Worker getByName(@PathVariable String firstName, @PathVariable String lastName) throws SQLException {
 		return WorkerRepository.getByName(firstName, lastName);
 	}
 	
-	@RequestMapping(method = RequestMethod.GET, value = CHEMIN_WORKER)
-	public Worker getById(@RequestParam(value = "id") int id) throws SQLException {
+	@RequestMapping(method = RequestMethod.GET, value = "/{id}")
+	public Worker getById(@PathVariable int id) throws SQLException {
 		return WorkerRepository.getById(id);
 	} 
 
-	@RequestMapping(method = RequestMethod.PUT, value = CHEMIN_WORKER)
+	@RequestMapping(method = RequestMethod.PUT)
 	public ResponseEntity<?> updateWorker(@RequestParam(value = "worker") Worker worker) {
 		try {
 			WorkerRepository.persist(worker);

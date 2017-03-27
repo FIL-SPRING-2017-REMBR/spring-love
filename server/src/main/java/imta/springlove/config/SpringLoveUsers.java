@@ -12,12 +12,14 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
 /**
  * Class used to manage the authentication. A user name is given to the method,
  * which will try to find the user in the database. If this user doesn't exist
  * then an exception is thrown.
  */
+@Service
 public class SpringLoveUsers implements UserDetailsService {
 
 	@Override
