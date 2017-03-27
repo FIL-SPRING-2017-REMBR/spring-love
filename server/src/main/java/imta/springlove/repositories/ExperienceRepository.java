@@ -51,7 +51,7 @@ public class ExperienceRepository {
 		//Experience
 		String sqlExperience = "INSERT INTO Experience " +
 				"(FK_typeExperienceId, organisation, role, beginDate, endDate, url, description) "
-				+ "VALUES (?,?,?,?,?,?);";
+				+ "VALUES (?,?,?,?,?,?,?);";
 		PreparedStatement psExperience = conn.prepareStatement(sqlExperience,Statement.RETURN_GENERATED_KEYS);
 		psExperience.setInt(1, experience.getType().getValue());
 		psExperience.setString(2, experience.getOrganisation());

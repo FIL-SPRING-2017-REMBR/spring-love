@@ -1,0 +1,110 @@
+CREATE DATABASE SpringLove;
+
+USE SpringLove;
+
+CREATE TABLE SpringLoveUser
+(
+	id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	username VARCHAR(30) NOT NULL,
+	passwd VARCHAR(30) NOT NULL
+)
+ENGINE=InnoDB;
+
+CREATE TABLE Worker
+(
+	id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	firstName VARCHAR(30) NOT NULL,
+	lastName VARCHAR(30) NOT NULL
+)
+ENGINE=InnoDB;
+
+CREATE TABLE Maturity
+(
+	id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	libelle VARCHAR(30) NOT NULL
+)
+ENGINE=InnoDB;
+
+INSERT INTO Maturity(libelle) VALUES ('Novice');
+INSERT INTO Maturity(libelle) VALUES ('Advanced');
+INSERT INTO Maturity(libelle) VALUES ('Competence');
+INSERT INTO Maturity(libelle) VALUES ('Proficient');
+INSERT INTO Maturity(libelle) VALUES ('Expert');
+
+CREATE TABLE Trend
+(
+	id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	libelle VARCHAR(30) NOT NULL
+)
+ENGINE=InnoDB;
+
+INSERT INTO Trend(libelle) VALUES ('Increasing');
+INSERT INTO Trend(libelle) VALUES ('Stable');
+INSERT INTO Trend(libelle) VALUES ('Decreasing');
+
+CREATE TABLE Skill
+(
+	id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	libelle VARCHAR(30) NOT NULL,
+	url VARCHAR(30)
+)
+ENGINE=InnoDB;
+
+CREATE TABLE TypeExperience
+(
+	id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	libelle VARCHAR(30) NOT NULL
+)
+ENGINE=InnoDB;
+
+INSERT INTO TypeExperience(libelle) VALUES ('Personal');
+INSERT INTO TypeExperience(libelle) VALUES ('Education');
+INSERT INTO TypeExperience(libelle) VALUES ('Work');
+
+CREATE TABLE Resource
+(
+	id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	FK_workerId INTEGER NOT NULL,
+	libelle VARCHAR(30) NOT NULL,
+	url VARCHAR(30)
+)
+ENGINE=InnoDB;
+
+ALTER TABLE Resource ADD FOREIGN KEY (FK_workerId) REFERENCES Worker(id);
+
+CREATE TABLE Experience
+(
+	id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	FK_typeExperienceId INTEGER NOT NULL,
+	organisation VARCHAR(30) NOT NULL,
+	role VARCHAR(30) NOT NULL,
+	beginDate DATETIME,
+	endDate DATETIME,
+	url VARCHAR(30),
+	description VARCHAR(30) NOT NULL
+);
+
+ALTER TABLE Experience ADD FOREIGN KEY (FK_typeExperienceId) REFERENCES TypeExperience(id);
+
+CREATE TABLE WorkerExperience
+(
+	id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	FK_workerId INTEGER NOT NULL,
+	FK_experienceId INTEGER NOT NULL
+)
+ENGINE=InnoDB;
+
+CREATE TABLE WorkerSkill
+(
+	id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	FK_workerId INTEGER NOT NULL,
+	FK_skillId INTEGER NOT NULL,
+	FK_maturityId INTEGER NOT NULL,
+	FK_trendId INTEGER NOT NULL
+)
+ENGINE=InnoDB;
+
+ALTER TABLE WorkerSkill ADD FOREIGN KEY (FK_workerId) REFERENCES Worker(id);
+ALTER TABLE WorkerSkill ADD FOREIGN KEY (FK_skillId) REFERENCES Skill(id);
+ALTER TABLE WorkerSkill ADD FOREIGN KEY (FK_maturityId) REFERENCES Maturity(id);
+ALTER TABLE WorkerSkill ADD FOREIGN KEY (FK_trendId) REFERENCES Trend(id);

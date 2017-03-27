@@ -83,7 +83,7 @@ public class WorkerRepository {
 		Worker worker = null;
 		//Get Worker
 		Connection conn = DatabaseConnection.getConnection();
-		String sql = "SELECT * FROM Worker WHERE firstName = "+firstName+" AND lastName = "+lastName+";";
+		String sql = "SELECT * FROM Worker WHERE firstName = '"+firstName+"' AND lastName = '"+lastName+"';";
 		Statement statement = conn.createStatement();
 		ResultSet rs = statement.executeQuery(sql);
 		if(rs.next()) {
@@ -121,10 +121,10 @@ public class WorkerRepository {
 	private static void loadSkillsFor(Worker worker) throws SQLException{
 		Connection conn = DatabaseConnection.getConnection();
 		String sql = "SELECT s.libelle AS libelleSkill, m.id AS idMaturity, t.id as idTrend "
-				+ "FROM WorkerSkill AS ws"
-				+ "INNER JOIN Skill AS s ON (s.id = ws.FK_skillId)"
-				+ "INNER JOIN Maturity AS m ON (m.id = ws.FK_maturityId)"
-				+ "INNER JOIN Trend AS t ON (t.id = ws.FK_trendId)"
+				+ "FROM WorkerSkill AS ws "
+				+ "INNER JOIN Skill AS s ON (s.id = ws.FK_skillId) "
+				+ "INNER JOIN Maturity AS m ON (m.id = ws.FK_maturityId) "
+				+ "INNER JOIN Trend AS t ON (t.id = ws.FK_trendId) "
 				+ "WHERE ws.FK_workerId = "+worker.getId()+";";
 		Statement statement = conn.createStatement();
 		ResultSet rs = statement.executeQuery(sql);
@@ -245,16 +245,20 @@ public class WorkerRepository {
 			String sqlAppetence = "INSERT INTO WorkerSkill " +
 				"(FK_workerId, FK_skillId, FK_maturityId, FK_trendId) VALUES (?, ?, ?, ?);";
 			PreparedStatement psAppetence = conn.prepareStatement(sqlAppetence,Statement.RETURN_GENERATED_KEYS);
-			psSkill.setInt(1, worker.getId());
-			psSkill.setInt(2, skillId);
-			psSkill.setInt(3, entry.getValue().getMaturity().getValue());
-			psSkill.setInt(4, entry.getValue().getTrend().getValue());
+			psAppetence.setInt(1, worker.getId());
+			psAppetence.setInt(2, skillId);
+			psAppetence.setInt(3, entry.getValue().getMaturity().getValue());
+			psAppetence.setInt(4, entry.getValue().getTrend().getValue());
+			psAppetence.executeUpdate();
+			psAppetence.close();
 		}
 		
 		//Persist Worker's Experiences
 		for (Experience experience : worker.getExperiences()) {
 			ExperienceRepository.persist(experience, worker.getId());
 		}
+		
+		conn.close();
 	}
 	
 }
