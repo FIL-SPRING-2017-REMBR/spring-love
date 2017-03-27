@@ -7,6 +7,9 @@ import java.util.List;
  * Represents an Experience.
  */
 public class Experience {
+	
+	/** The id of the experience */
+	private int id;
 
 	/** The name of the experience (e.g. the name of the project). */
 	private String name;
@@ -20,8 +23,8 @@ public class Experience {
 	/** The type of the experience : personal, work or education. */
 	private TypeExperience type;
 
-	/** URLs concerning this experience. */
-	private List<String> url;
+	/** URL concerning this experience. */
+	private String url;
 
 	/** The beginning and the end of this experience. */
 	private Date[] temporalRange;
@@ -51,9 +54,10 @@ public class Experience {
 	 * @param description
 	 *            The description of this experience.
 	 */
-	public Experience(String name, String organisation, String role, TypeExperience type, List<String> url,
+	public Experience(String name, String organisation, String role, TypeExperience type, String url,
 			Date beginning, Date end, String description) {
 		super();
+		this.id = 0;
 		this.name = name;
 		this.organisation = organisation;
 		this.role = role;
@@ -63,6 +67,13 @@ public class Experience {
 		this.description = description;
 	}
 
+	public int getId() {
+		return id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
+	}
 	
 	public String getName() {
 		return name;
@@ -96,11 +107,11 @@ public class Experience {
 		this.type = type;
 	}
 
-	public List<String> getUrl() {
+	public String getUrl() {
 		return url;
 	}
 
-	public void setUrl(List<String> url) {
+	public void setUrl(String url) {
 		this.url = url;
 	}
 

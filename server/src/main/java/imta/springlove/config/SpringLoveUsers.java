@@ -4,7 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.Collection;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -20,21 +24,20 @@ public class SpringLoveUsers implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
 		String sql = "SELECT * FROM User WHERE Name = ?";
-
+		UserDetails user = null;
 		Connection conn = null;
 
 		try {
 			conn = DatabaseConnection.getConnection();
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, username);
-			UserDetails user = null;
 			ResultSet rs = ps.executeQuery();
-			if (rs.next()) {
-//				user = new UserDetails(); //TODO: instanciate the true object
-			} else throw new UsernameNotFoundException(username);
+			if (rs.next())
+				user = new User(rs.getString("username"), rs.getString("password"), this.getAuthorities());
+			else
+				throw new UsernameNotFoundException(username);
 			rs.close();
 			ps.close();
-//			return user;
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		} finally {
@@ -44,7 +47,11 @@ public class SpringLoveUsers implements UserDetailsService {
 				} catch (SQLException e) {}
 			}
 		}
-		return null;
+		return user;
+	}
+	
+	private Collection<? extends GrantedAuthority> getAuthorities() {
+		return Arrays.asList(new UserAuthority());
 	}
 
 }

@@ -46,7 +46,7 @@ public class WorkerRepository {
 			loadSkillsFor(worker);
 			
 			//Get experiences
-//			worker.setExperiences(ExperienceRepository.findByWorkerId());
+			worker.setExperiences(ExperienceRepository.findByWorkerId(id));
 		} else {
 			//TODO: lever une exception
 			return null;
@@ -73,7 +73,7 @@ public class WorkerRepository {
 			loadSkillsFor(worker);
 			
 			//Get experiences
-//			worker.setExperiences(ExperienceRepository.findByWorkerId());
+			worker.setExperiences(ExperienceRepository.findByWorkerId(worker.getId()));
 			workers.add(worker);
 		}
 		return workers;
@@ -97,7 +97,7 @@ public class WorkerRepository {
 			loadSkillsFor(worker);
 			
 			//Get experiences
-//			worker.setExperiences(ExperienceRepository.findByWorkerId());
+			worker.setExperiences(ExperienceRepository.findByWorkerId(worker.getId()));
 			
 		} else {
 			//TODO: lever une exception
@@ -106,16 +106,16 @@ public class WorkerRepository {
 		return worker;
 	}
 	
-	private static void loadRessoucesFor(Worker worker) throws SQLException{
-			Connection conn = DatabaseConnection.getConnection();
-			String sql = "SELECT * FROM Resource where FK_workerId = "+worker.getId()+";";
-			Statement statement = conn.createStatement();
-			ResultSet rs = statement.executeQuery(sql);
-			Map<String,String> resources = new HashMap<String,String>();
-			while(rs.next()) {
-				resources.put(rs.getString("libelle"), rs.getString("url"));
-			}
-			worker.setResources(resources);
+	private static void loadRessoucesFor(Worker worker) throws SQLException {
+		Connection conn = DatabaseConnection.getConnection();
+		String sql = "SELECT * FROM Resource where FK_workerId = "+worker.getId()+";";
+		Statement statement = conn.createStatement();
+		ResultSet rs = statement.executeQuery(sql);
+		Map<String,String> resources = new HashMap<String,String>();
+		while(rs.next()) {
+			resources.put(rs.getString("libelle"), rs.getString("url"));
+		}
+		worker.setResources(resources);
 	}
 	
 	private static void loadSkillsFor(Worker worker) throws SQLException{
@@ -181,7 +181,7 @@ public class WorkerRepository {
 			ResultSet generatedKeysSkill = psSkill.getGeneratedKeys();
 			if (generatedKeysSkill.next()) {
 				skillId = generatedKeysSkill.getInt(1);
-	           }
+	        }
 			psSkill.close();
 			
 			String sqlAppetence = "INSERT INTO WorkerSkill " +
@@ -195,8 +195,10 @@ public class WorkerRepository {
 		
 		//Modify Worker's Experiences
 		for (Experience experience : worker.getExperiences()) {
-//			ExperienceRepository.modify(experience, worker.getId());
+			ExperienceRepository.persist(experience, worker.getId());
 		}
+		
+		conn.close();
 	}
 
 	private static void insert(Worker worker) throws SQLException{
@@ -251,7 +253,7 @@ public class WorkerRepository {
 		
 		//Persist Worker's Experiences
 		for (Experience experience : worker.getExperiences()) {
-//			ExperienceRepository.persist(experience, worker.getId());
+			ExperienceRepository.persist(experience, worker.getId());
 		}
 	}
 	
