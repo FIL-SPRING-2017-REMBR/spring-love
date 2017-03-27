@@ -67,9 +67,10 @@ public class SkillRepository {
 		int skillId = 0;
 		Connection conn = DatabaseConnection.getConnection();
 		String sqlSkill = "INSERT INTO Skill " +
-			"(libelle) VALUES (?);";
+			"(libelle, url) VALUES (?, ?);";
 		PreparedStatement psSkill = conn.prepareStatement(sqlSkill,Statement.RETURN_GENERATED_KEYS);
 		psSkill.setString(1, skill.getName());
+		psSkill.setString(2, skill.getUrl());
 		psSkill.executeUpdate();
 		ResultSet generatedKeysSkill = psSkill.getGeneratedKeys();
 		if (generatedKeysSkill.next()) {

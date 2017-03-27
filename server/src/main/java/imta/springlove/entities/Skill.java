@@ -22,51 +22,21 @@ public class Skill implements Serializable {
 	private String name;
 	
 	/** Resources related to this Skill. It links a label to an URL. */
-	private Map<String, String> resources;
+	private String url;
 	
 	/** A skill related to this one. */
 	private Skill skill;
 
+
+	public Skill() {
+		// constructeur par défaut
+	}
 	
-	/**
-	 * Instantiates a new Skill.
-	 *
-	 * @param name the name of the Skill
-	 */
 	public Skill(String name) {
-		this.id = 0;
+		super();
 		this.name = name;
 	}
 
-	/**
-	 * Instantiates a new Skill.
-	 *
-	 * @param name the name of the Skill
-	 * @param resources the resources (key : label, value : URL)
-	 */
-	public Skill(String name, Map<String, String> resources) {
-		super();
-		this.id = 0;
-		this.name = name;
-		this.resources = resources;
-	}
-
-	/**
-	 * Instantiates a new Skill.
-	 *
-	 * @param name the name of the Skill
-	 * @param resources the resources (key : label, value : URL)
-	 * @param skill a skill related to this skill 
-	 */
-	public Skill(String name, Map<String, String> resources, Skill skill) {
-		super();
-		this.id = 0;
-		this.name = name;
-		this.resources = resources;
-		this.skill = skill;
-	}
-	
-	
 	public int getId(){
 		return id;
 	}
@@ -91,12 +61,17 @@ public class Skill implements Serializable {
 		this.skill = skill;
 	}
 
-	public Map<String, String> getResources() {
-		return resources;
+	public String getUrl() {
+		return url;
 	}
 
-	public void setResources(Map<String, String> resources) {
-		this.resources = resources;
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	@Override
+	public String toString() {
+		return "Skill [id=" + id + ", name=" + name + ", url=" + url + ", skill=" + skill + "]";
 	}
 	
 }
