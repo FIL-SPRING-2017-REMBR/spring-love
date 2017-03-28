@@ -1,10 +1,12 @@
 package imta.springlove.entities;
 
+import java.io.Serializable;
+
 /**
  * Represents the trend for the evolution of a {@link Skill} for a
  * {@link Worker}.
  */
-public enum Trend {
+public enum Trend implements Serializable {
 
 	INCREASING(1),
 	STABLE(2)    ,

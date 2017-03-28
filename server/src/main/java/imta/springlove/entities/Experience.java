@@ -35,6 +35,10 @@ public class Experience implements Serializable {
 	private String description;
 
 	
+	public Experience() {
+		// constructeur par défaut
+	}
+	
 	/**
 	 * Instantiates a new Experience.
 	 * 

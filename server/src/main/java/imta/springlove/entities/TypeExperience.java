@@ -1,10 +1,12 @@
 package imta.springlove.entities;
 
+import java.io.Serializable;
+
 /**
  * This enum contains the different types of Experiences.
  * There are three types : personal, education and work.
  */
-public enum TypeExperience {
+public enum TypeExperience implements Serializable {
 
 	PERSONAL(1),
 	EDUCATION(2),

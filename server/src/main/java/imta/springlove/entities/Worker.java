@@ -9,7 +9,7 @@ import java.util.Map;
  * (URLs) related to him/her.
  */
 public class Worker implements Serializable {
-	
+
 	private static final long serialVersionUID = -7361947245745149893L;
 
 	/** Id of the Worker. */

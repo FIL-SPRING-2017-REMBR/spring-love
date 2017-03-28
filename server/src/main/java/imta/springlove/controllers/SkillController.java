@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,8 +21,18 @@ import imta.springlove.repositories.SkillRepository;
 public class SkillController {
 
 	@GetMapping(value = "/all")
-	public List<Skill> getSkill() throws SQLException {
+	public List<Skill> getSkills() throws SQLException {
 		return SkillRepository.getSkills();
+	}
+	
+	@GetMapping(value = "/{name}")
+	public Skill getSkillByName(@PathVariable String name) throws SQLException {
+		return SkillRepository.getSkillByName(name);
+	}
+	
+	@GetMapping(value = "/{id}")
+	public Skill getSkillById(@PathVariable int id) throws SQLException {
+		return SkillRepository.getSkillById(id);
 	}
 	
 	@PostMapping

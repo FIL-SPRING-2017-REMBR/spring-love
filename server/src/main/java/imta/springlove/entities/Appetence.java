@@ -18,6 +18,10 @@ public class Appetence implements Serializable {
 	private Trend trend;
 
 	
+	public Appetence() {
+		
+	}
+	
 	/**
 	 * Instantiates a new Appetence.
 	 * 
